@@ -1,0 +1,11 @@
+<#macro tabs tab >
+<div>
+    <ul class="nav nav-tabs">
+        <li <#if tab="word">class="active"</#if>>
+            <a href="jsp/admin/plugins/profanityfilter/ManageWords.jsp">
+                #i18n{profanityfilter.manage_words.pageTitle}
+            </a>
+        </li>
+    </ul>
+</div>
+</#macro>

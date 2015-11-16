@@ -1,0 +1,13 @@
+<#include "manageprofanityfilter_tabs.html" />
+<@tabs tab="word" />
+
+<@rowBoxHeader i18nTitleKey="profanityfilter.create_word.pageTitle">
+    <form class="form-horizontal" method="post" name="create_word" action="jsp/admin/plugins/profanityfilter/ManageWords.jsp">
+        <@messages errors=errors />
+        <input type="hidden" id="id" name="id"/>
+        
+        <@fieldInputText i18nLabelKey="profanityfilter.create_word.labelValue" inputName="value" mandatory=true value="${word.value!''}" i18nHelpBlockKey="profanityfilter.create_word.labelValue.help" />
+        <@actionButtons button1Name="action_createWord" button2Name="view_manageWords"/>
+    </form>
+</@rowBoxHeader>
+
