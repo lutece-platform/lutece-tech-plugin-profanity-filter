@@ -32,10 +32,22 @@
     </admin-features>    
 
     <!-- XPages parameters -->
+
     <applications>
+        <application>
+            <application-id>filter</application-id>
+            <application-class>fr.paris.lutece.plugins.profanityfilter.web.FilterXPage</application-class>
+        </application>
     </applications>
+
 
     <!-- Portlet parameters -->
     <portlets>
    </portlets>
+   <javascript-files>
+        <javascript-files-scope>portal</javascript-files-scope>
+        <javascript-file>profanityfilter/profanityfilter.js</javascript-file>
+    </javascript-files>
+   
+   
 </plug-in>

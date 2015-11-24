@@ -19,7 +19,7 @@ public class ProfanityResult {
 		this._strWords.add(_strWord);
 	}
 
-	public Set<String> getSwearWords(String _strWord) {
+	public Set<String> getSwearWords() {
 		return this._strWords;
 	}
 
@@ -32,7 +32,7 @@ public class ProfanityResult {
 		this._nNumberSwearWords = _nNumberSwearWords;
 	}
 
-	public boolean isIsSwearWords() {
+	public boolean isSwearWords() {
 		return _bIsSwearWords;
 	}
 

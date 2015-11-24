@@ -2,6 +2,8 @@ package fr.paris.lutece.plugins.profanityfilter.service;
 
 import java.util.Collection;
 
+import org.apache.commons.lang.StringUtils;
+
 import fr.paris.lutece.plugins.profanityfilter.business.Word;
 import fr.paris.lutece.plugins.profanityfilter.business.WordHome;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
@@ -19,7 +21,7 @@ public class ProfanityFilter implements IProfanityFilter{
     *
     * @return IEudonetWsService
     */
-   public static ProfanityFilter getService(  )
+   public static IProfanityFilter getService(  )
    {
        if ( _singleton == null )
        {
@@ -33,23 +35,27 @@ public class ProfanityFilter implements IProfanityFilter{
 	public ProfanityResult checkString(String str) {
 		
 		ProfanityResult profResult= new ProfanityResult();
+		String [] wordStr = null;
 		Collection<Word> wordList= WordHome.getWordsList();
-		String [] wordStr= str.split(CHARACTER_SPACE_BETWEEN_WORDS);
+		if(str!=null && StringUtils.isNotEmpty(str) && StringUtils.isNotBlank(str)){
+			wordStr= str.split(" ");
+		}
 		boolean _isSwearWords= false;
 		int number= 0;
-		
-		for(String word:wordStr){
+		if(wordStr!= null){
 			
-			if(wordList.contains(word)){
+			for(String word:wordStr){
 				
-				profResult.addWord(word);
-				_isSwearWords= true;
-				number++;
+				if( containsReferenceTo( wordList, word)){
+					
+					profResult.addWord(word);
+					_isSwearWords= true;
+					number++;
+					
+				}
 				
 			}
-			
-		}
-		
+		}	
 		profResult.setIsSwearWords(_isSwearWords);
 		profResult.setNumberSwearWords(number);
 		
@@ -57,6 +63,17 @@ public class ProfanityFilter implements IProfanityFilter{
 	}
    
    
-   
+	public static  boolean containsReferenceTo(Collection<Word> collection,
+	        String element) {
+	    if (collection == null)
+	        throw new NullPointerException("collection cannot be null");
+
+	    for (Word x : collection) {
+	        if (x.getValue( ).equals(element)) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
 
 }
