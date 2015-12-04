@@ -41,13 +41,12 @@ import javax.validation.constraints.*;
 /**
  * This is the business class for the object Word
  */
-public class Word
+public class Counter
 {
     // Variables declarations 
     private int _nId;
-    @NotEmpty( message = "#i18n{profanityfilter.validation.word.Value.notEmpty}" )
-    @Size( max = 50, message = "#i18n{profanityfilter.validation.word.Value.size}" )
-    private String _strValue;
+    private String _strResourceType;
+    private int _ncounter;
 
     /**
      * Returns the Id
@@ -68,20 +67,38 @@ public class Word
     }
 
     /**
-     * Returns the Value
-     * @return The Value
+     * Returns the _strResourceType
+     * @return The _strResourceType
      */
-    public String getValue(  )
+    public String getResourceType(  )
     {
-        return _strValue;
+        return _strResourceType;
     }
 
     /**
-     * Sets the Value
-     * @param strValue The Value
+     * Sets the _strResourceType
+     * @param strValue The _strResourceType
      */
-    public void setValue( String strValue )
+    public void setResourceType( String strResourceType )
     {
-        _strValue = strValue;
+        _strResourceType = strResourceType;
+    }
+
+    /**
+     * Returns the counter
+     * @return The counter
+     */
+    public int getCounter(  )
+    {
+        return _ncounter;
+    }
+
+    /**
+     * Sets the _ncounter
+     * @param nId The _ncounter
+     */
+    public void setCounter( int ncounter )
+    {
+        _ncounter = ncounter;
     }
 }

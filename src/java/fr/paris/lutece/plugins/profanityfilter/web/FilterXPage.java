@@ -32,12 +32,6 @@
  * License 1.0
  */
 package fr.paris.lutece.plugins.profanityfilter.web;
- 
-
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import fr.paris.lutece.plugins.profanityfilter.business.Word;
 import fr.paris.lutece.plugins.profanityfilter.business.WordHome;
@@ -53,13 +47,19 @@ import fr.paris.lutece.util.json.AbstractJsonResponse;
 import fr.paris.lutece.util.json.ErrorJsonResponse;
 import fr.paris.lutece.util.json.JsonResponse;
 import fr.paris.lutece.util.json.JsonUtil;
+
 import fr.paris.plugins.profanityfilter.utils.ProfanityResult;
+
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 
 /**
  * This class provides the user interface to view Idee xpages
  */
- 
-@Controller( xpageName = "filter" , pageTitleI18nKey = "profanityfilter.xpage.filter.pageTitle" , pagePathI18nKey = "profanityfilter.xpage.filter.pagePathLabel" )
+@Controller( xpageName = "filter", pageTitleI18nKey = "profanityfilter.xpage.filter.pageTitle", pagePathI18nKey = "profanityfilter.xpage.filter.pagePathLabel" )
 public class FilterXPage extends MVCApplication
 {
     /**
@@ -68,71 +68,77 @@ public class FilterXPage extends MVCApplication
     private static final long serialVersionUID = 2703580251118435168L;
 
     // Templates
-    private static final String TEMPLATE_VIEW_FILTER="/skin/plugins/profanityfilter/view_filter.html";
-    
+    private static final String TEMPLATE_VIEW_FILTER = "/skin/plugins/profanityfilter/view_filter.html";
+
     // Parameters
-    private static final String PARAMETER_WORD="word";
-    
+    private static final String PARAMETER_WORD = "word";
+    private static final String PARAMETER_TYPE_RESSOURCE = "typeResource";
+
     // Markers
     private static final String MARK_WORDS_NOTAUTHORIZED = "wordsNotAuthorized";
- 
-    
-    
-    
+
     // Views
     private static final String VIEW_FILTER = "viewFilter";
-  
+
     //Actions 
-    
     private static final String ACTION_PROFANITY_FILTER = "isSwearWord";
-    
+
     // Json CODE
     private static final String JSON_WORD_NOT_AUTHORIZED = "WORD_NOT_AUTHORIZED";
     private static final String JSON_WORD_AUTHORIZED = "WORD_IS_AUTHORIZED";
 
-    
     /**
      * Returns the view  of filter
      *
      * @param request The Http request
-     * @return The HTML 
+     * @return The HTML
      */
     @View( value = VIEW_FILTER, defaultView = true )
     public XPage getViewFilter( HttpServletRequest request )
     {
-       
-    	List<Word> listWords = (List<Word>) WordHome.getWordsList(  );
+        List<Word> listWords = (List<Word>) WordHome.getWordsList(  );
         Map<String, Object> model = getModel(  );
-        model.put(MARK_WORDS_NOTAUTHORIZED, listWords);
-        
+        model.put( MARK_WORDS_NOTAUTHORIZED, listWords );
+
         return getXPage( TEMPLATE_VIEW_FILTER, request.getLocale(  ), model );
     }
+
     /**
-     * 
+     *
      * @param request
      * @return
      * @throws UserNotSignedException
      */
     @Action( value = ACTION_PROFANITY_FILTER )
-    public String isSwearWord( HttpServletRequest request )throws UserNotSignedException
+    public String isSwearWord( HttpServletRequest request )
+        throws UserNotSignedException
     {
-    	AbstractJsonResponse jsonResponse = null;
-		
-		IProfanityFilter _filterService= ProfanityFilter.getService();
-		
-		String word= request.getParameter(PARAMETER_WORD);
-		ProfanityResult result= _filterService.checkString(word);
+        AbstractJsonResponse jsonResponse = null;
+        ProfanityResult result = null;
 
-		if (result.isSwearWords()) {
-			
-			jsonResponse = new JsonResponse(result.getSwearWords( ));	
-			
-		}
-		else {
-			jsonResponse = new ErrorJsonResponse( JSON_WORD_AUTHORIZED );
-		}
+        IProfanityFilter _filterService = ProfanityFilter.getService(  );
 
-		return JsonUtil.buildJsonResponse(jsonResponse);
+        String word = request.getParameter( PARAMETER_WORD );
+        String typeResource = request.getParameter( PARAMETER_TYPE_RESSOURCE );
+
+        if ( typeResource != null )
+        {
+            result = _filterService.checkStringCpt( word, typeResource );
+        }
+        else
+        {
+            result = _filterService.checkString( word );
+        }
+
+        if ( ( result != null ) && result.isSwearWords(  ) )
+        {
+            jsonResponse = new JsonResponse( result.getSwearWords(  ) );
+        }
+        else
+        {
+            jsonResponse = new ErrorJsonResponse( JSON_WORD_AUTHORIZED );
+        }
+
+        return JsonUtil.buildJsonResponse( jsonResponse );
     }
- 
 }

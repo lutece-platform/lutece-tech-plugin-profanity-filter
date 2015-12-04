@@ -31,8 +31,6 @@
  *
  * License 1.0
  */
-
- 
 package fr.paris.lutece.plugins.profanityfilter.web;
 
 import fr.paris.lutece.plugins.profanityfilter.business.Word;
@@ -47,7 +45,6 @@ import fr.paris.lutece.util.url.UrlItem;
 import java.util.List;
 import java.util.Map;
 
-
 import javax.servlet.http.HttpServletRequest;
 
 
@@ -57,7 +54,6 @@ import javax.servlet.http.HttpServletRequest;
 @Controller( controllerJsp = "ManageWords.jsp", controllerPath = "jsp/admin/plugins/profanityfilter/", right = "PROFANITYFILTER_MANAGEMENT" )
 public class WordJspBean extends ManageProfanityfilterJspBean
 {
-
     ////////////////////////////////////////////////////////////////////////////
     // Constants
 
@@ -65,7 +61,6 @@ public class WordJspBean extends ManageProfanityfilterJspBean
     private static final String TEMPLATE_MANAGE_WORDS = "/admin/plugins/profanityfilter/manage_words.html";
     private static final String TEMPLATE_CREATE_WORD = "/admin/plugins/profanityfilter/create_word.html";
     private static final String TEMPLATE_MODIFY_WORD = "/admin/plugins/profanityfilter/modify_word.html";
-
 
     // Parameters
     private static final String PARAMETER_ID_WORD = "id";
@@ -78,13 +73,11 @@ public class WordJspBean extends ManageProfanityfilterJspBean
     // Markers
     private static final String MARK_WORD_LIST = "word_list";
     private static final String MARK_WORD = "word";
-
     private static final String JSP_MANAGE_WORDS = "jsp/admin/plugins/profanityfilter/ManageWords.jsp";
 
     // Properties
     private static final String MESSAGE_CONFIRM_REMOVE_WORD = "profanityfilter.message.confirmRemoveWord";
     private static final String PROPERTY_DEFAULT_LIST_WORD_PER_PAGE = "profanityfilter.listWords.itemsPerPage";
- 
     private static final String VALIDATION_ATTRIBUTES_PREFIX = "profanityfilter.model.entity.word.attribute.";
 
     // Views
@@ -102,15 +95,15 @@ public class WordJspBean extends ManageProfanityfilterJspBean
     private static final String INFO_WORD_CREATED = "profanityfilter.info.word.created";
     private static final String INFO_WORD_UPDATED = "profanityfilter.info.word.updated";
     private static final String INFO_WORD_REMOVED = "profanityfilter.info.word.removed";
-    
+
     // Session variable to store working values
     private Word _word;
-    
-    
+
     @View( value = VIEW_MANAGE_WORDS, defaultView = true )
     public String getManageWords( HttpServletRequest request )
     {
         _word = null;
+
         List<Word> listWords = (List<Word>) WordHome.getWordsList(  );
         Map<String, Object> model = getPaginatedListModel( request, MARK_WORD_LIST, listWords, JSP_MANAGE_WORDS );
 
@@ -171,8 +164,8 @@ public class WordJspBean extends ManageProfanityfilterJspBean
         UrlItem url = new UrlItem( getActionUrl( ACTION_REMOVE_WORD ) );
         url.addParameter( PARAMETER_ID_WORD, nId );
 
-        String strMessageUrl = AdminMessageService.getMessageUrl( request, MESSAGE_CONFIRM_REMOVE_WORD,
-                url.getUrl(  ), AdminMessage.TYPE_CONFIRMATION );
+        String strMessageUrl = AdminMessageService.getMessageUrl( request, MESSAGE_CONFIRM_REMOVE_WORD, url.getUrl(  ),
+                AdminMessage.TYPE_CONFIRMATION );
 
         return redirect( request, strMessageUrl );
     }
@@ -204,7 +197,7 @@ public class WordJspBean extends ManageProfanityfilterJspBean
     {
         int nId = Integer.parseInt( request.getParameter( PARAMETER_ID_WORD ) );
 
-        if ( _word == null || ( _word.getId(  ) != nId ))
+        if ( ( _word == null ) || ( _word.getId(  ) != nId ) )
         {
             _word = WordHome.findByPrimaryKey( nId );
         }
@@ -229,7 +222,7 @@ public class WordJspBean extends ManageProfanityfilterJspBean
         // Check constraints
         if ( !validateBean( _word, VALIDATION_ATTRIBUTES_PREFIX ) )
         {
-            return redirect( request, VIEW_MODIFY_WORD, PARAMETER_ID_WORD, _word.getId( ) );
+            return redirect( request, VIEW_MODIFY_WORD, PARAMETER_ID_WORD, _word.getId(  ) );
         }
 
         WordHome.update( _word );

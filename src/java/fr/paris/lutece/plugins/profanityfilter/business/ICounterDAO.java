@@ -39,27 +39,27 @@ import java.util.Collection;
 
 
 /**
- * IWordDAO Interface
+ * ICounterDAO Interface
  */
-public interface IWordDAO
+public interface ICounterDAO
 {
     /**
      * Insert a new record in the table.
-     * @param word instance of the Word object to insert
+     * @param word instance of the Counter object to insert
      * @param plugin the Plugin
      */
-    void insert( Word word, Plugin plugin );
+    void insert( Counter counter, Plugin plugin );
 
     /**
      * Update the record in the table
-     * @param word the reference of the Word
+     * @param word the reference of the Counter
      * @param plugin the Plugin
      */
-    void store( Word word, Plugin plugin );
+    void store( Counter counter, Plugin plugin );
 
     /**
      * Delete a record from the table
-     * @param nKey The identifier of the Word to delete
+     * @param nKey The identifier of the Counter to delete
      * @param plugin the Plugin
      */
     void delete( int nKey, Plugin plugin );
@@ -69,23 +69,23 @@ public interface IWordDAO
 
     /**
      * Load the data from the table
-     * @param nKey The identifier of the word
+     * @param strResourceType The identifier of the Counter
      * @param plugin the Plugin
-     * @return The instance of the word
+     * @return The instance of the Counter
      */
-    Word load( int nKey, Plugin plugin );
+    Counter load( String strResourceType, Plugin plugin );
 
     /**
      * Load the data of all the word objects and returns them as a collection
      * @param plugin the Plugin
-     * @return The collection which contains the data of all the word objects
+     * @return The collection which contains the data of all the Counter objects
      */
-    Collection<Word> selectWordsList( Plugin plugin );
+    Collection<Counter> selectCounterList( Plugin plugin );
 
     /**
      * Load the id of all the word objects and returns them as a collection
      * @param plugin the Plugin
-     * @return The collection which contains the id of all the word objects
+     * @return The collection which contains the id of all the Counter objects
      */
-    Collection<Integer> selectIdWordsList( Plugin plugin );
+    Collection<Integer> selectIdCounterList( Plugin plugin );
 }

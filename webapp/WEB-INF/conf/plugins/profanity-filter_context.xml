@@ -6,6 +6,8 @@
 
 
     <bean id="profanityfilter.wordDAO"  class="fr.paris.lutece.plugins.profanityfilter.business.WordDAO" />  
+    <bean id="profanityfilter.counterDAO"  class="fr.paris.lutece.plugins.profanityfilter.business.CounterDAO" />  
+    
     <bean id="profanityfilter.profanityfilterService"  class="fr.paris.lutece.plugins.profanityfilter.service.ProfanityFilter" />
     
 </beans>

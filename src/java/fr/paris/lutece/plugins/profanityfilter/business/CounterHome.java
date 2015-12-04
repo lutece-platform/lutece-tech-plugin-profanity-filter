@@ -43,46 +43,46 @@ import java.util.Collection;
 /**
  * This class provides instances management methods (create, find, ...) for Word objects
  */
-public final class WordHome
+public final class CounterHome
 {
     // Static variable pointed at the DAO instance
-    private static IWordDAO _dao = SpringContextService.getBean( "profanityfilter.wordDAO" );
+    private static ICounterDAO _dao = SpringContextService.getBean( "profanityfilter.counterDAO" );
     private static Plugin _plugin = PluginService.getPlugin( "profanityfilter" );
 
     /**
      * Private constructor - this class need not be instantiated
      */
-    private WordHome(  )
+    private CounterHome(  )
     {
     }
 
     /**
      * Create an instance of the word class
-     * @param word The instance of the Word which contains the informations to store
-     * @return The  instance of word which has been created with its primary key.
+     * @param word The instance of the Counter which contains the informations to store
+     * @return The  instance of Counter which has been created with its primary key.
      */
-    public static Word create( Word word )
+    public static Counter create( Counter counter )
     {
-        _dao.insert( word, _plugin );
+        _dao.insert( counter, _plugin );
 
-        return word;
+        return counter;
     }
 
     /**
-     * Update of the word which is specified in parameter
-     * @param word The instance of the Word which contains the data to store
-     * @return The instance of the  word which has been updated
+     * Update of the Counter which is specified in parameter
+     * @param word The instance of the Counter which contains the data to store
+     * @return The instance of the  Counter which has been updated
      */
-    public static Word update( Word word )
+    public static Counter update( Counter counter )
     {
-        _dao.store( word, _plugin );
+        _dao.store( counter, _plugin );
 
-        return word;
+        return counter;
     }
 
     /**
-     * Remove the word whose identifier is specified in parameter
-     * @param nKey The word Id
+     * Remove the Counter whose identifier is specified in parameter
+     * @param nKey The Counter Id
      */
     public static void remove( int nKey )
     {
@@ -97,26 +97,26 @@ public final class WordHome
      * @param nKey The word primary key
      * @return an instance of Word
      */
-    public static Word findByPrimaryKey( int nKey )
+    public static Counter findByResourceTypeKey( String strReourceType )
     {
-        return _dao.load( nKey, _plugin );
+        return _dao.load( strReourceType, _plugin );
     }
 
     /**
-     * Load the data of all the word objects and returns them in form of a collection
-     * @return the collection which contains the data of all the word objects
+     * Load the data of all the Counter objects and returns them in form of a collection
+     * @return the collection which contains the data of all the Counter objects
      */
-    public static Collection<Word> getWordsList(  )
+    public static Collection<Counter> getCounterList(  )
     {
-        return _dao.selectWordsList( _plugin );
+        return _dao.selectCounterList( _plugin );
     }
 
     /**
-     * Load the id of all the word objects and returns them in form of a collection
-     * @return the collection which contains the id of all the word objects
+     * Load the id of all the Counter objects and returns them in form of a collection
+     * @return the collection which contains the id of all the Counter objects
      */
     public static Collection<Integer> getIdWordsList(  )
     {
-        return _dao.selectIdWordsList( _plugin );
+        return _dao.selectIdCounterList( _plugin );
     }
 }

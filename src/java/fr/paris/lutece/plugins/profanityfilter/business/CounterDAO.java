@@ -43,16 +43,16 @@ import java.util.Collection;
 /**
  * This class provides Data Access methods for Word objects
  */
-public final class WordDAO implements IWordDAO
+public final class CounterDAO implements ICounterDAO
 {
     // Constants
-    private static final String SQL_QUERY_NEW_PK = "SELECT max( id_word ) FROM profanityfilter_word";
-    private static final String SQL_QUERY_SELECT = "SELECT id_word, value FROM profanityfilter_word WHERE id_word = ?";
-    private static final String SQL_QUERY_INSERT = "INSERT INTO profanityfilter_word ( id_word, value ) VALUES ( ?, ? ) ";
-    private static final String SQL_QUERY_DELETE = "DELETE FROM profanityfilter_word WHERE id_word = ? ";
-    private static final String SQL_QUERY_UPDATE = "UPDATE profanityfilter_word SET id_word = ?, value = ? WHERE id_word = ?";
-    private static final String SQL_QUERY_SELECTALL = "SELECT id_word, value FROM profanityfilter_word";
-    private static final String SQL_QUERY_SELECTALL_ID = "SELECT id_word FROM profanityfilter_word";
+    private static final String SQL_QUERY_NEW_PK = "SELECT max( id_counter ) FROM profanityfilter_counter";
+    private static final String SQL_QUERY_SELECT = "SELECT id_counter, resouece_type, counter FROM profanityfilter_counter WHERE resouece_type = ?";
+    private static final String SQL_QUERY_INSERT = "INSERT INTO profanityfilter_counter ( id_counter, resouece_type, counter ) VALUES ( ?, ?, ? ) ";
+    private static final String SQL_QUERY_DELETE = "DELETE FROM profanityfilter_counter WHERE id_counter = ? ";
+    private static final String SQL_QUERY_UPDATE = "UPDATE profanityfilter_counter SET id_counter = ?, resouece_type = ?, counter = ? WHERE resouece_type = ?";
+    private static final String SQL_QUERY_SELECTALL = "SELECT id_counter, resouece_type, counter FROM profanityfilter_counter";
+    private static final String SQL_QUERY_SELECTALL_ID = "SELECT id_counter FROM profanityfilter_counter";
 
     /**
      * Generates a new primary key
@@ -80,14 +80,15 @@ public final class WordDAO implements IWordDAO
      * {@inheritDoc }
      */
     @Override
-    public void insert( Word word, Plugin plugin )
+    public void insert( Counter counter, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT, plugin );
 
-        word.setId( newPrimaryKey( plugin ) );
+        counter.setId( newPrimaryKey( plugin ) );
 
-        daoUtil.setInt( 1, word.getId(  ) );
-        daoUtil.setString( 2, word.getValue(  ) );
+        daoUtil.setInt( 1, counter.getId(  ) );
+        daoUtil.setString( 2, counter.getResourceType(  ) );
+        daoUtil.setInt( 3, counter.getCounter(  ) );
 
         daoUtil.executeUpdate(  );
         daoUtil.free(  );
@@ -97,24 +98,25 @@ public final class WordDAO implements IWordDAO
      * {@inheritDoc }
      */
     @Override
-    public Word load( int nKey, Plugin plugin )
+    public Counter load( String strResourceType, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT, plugin );
-        daoUtil.setInt( 1, nKey );
+        daoUtil.setString( 1, strResourceType );
         daoUtil.executeQuery(  );
 
-        Word word = null;
+        Counter counter = null;
 
         if ( daoUtil.next(  ) )
         {
-            word = new Word(  );
-            word.setId( daoUtil.getInt( 1 ) );
-            word.setValue( daoUtil.getString( 2 ) );
+            counter = new Counter(  );
+            counter.setId( daoUtil.getInt( 1 ) );
+            counter.setResourceType( daoUtil.getString( 2 ) );
+            counter.setCounter( daoUtil.getInt( 3 ) );
         }
 
         daoUtil.free(  );
 
-        return word;
+        return counter;
     }
 
     /**
@@ -133,13 +135,15 @@ public final class WordDAO implements IWordDAO
      * {@inheritDoc }
      */
     @Override
-    public void store( Word word, Plugin plugin )
+    public void store( Counter counter, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_UPDATE, plugin );
 
-        daoUtil.setInt( 1, word.getId(  ) );
-        daoUtil.setString( 2, word.getValue(  ) );
-        daoUtil.setInt( 3, word.getId(  ) );
+        daoUtil.setInt( 1, counter.getId(  ) );
+        daoUtil.setString( 2, counter.getResourceType(  ) );
+        daoUtil.setInt( 3, counter.getCounter(  ) );
+
+        daoUtil.setString( 4, counter.getResourceType(  ) );
 
         daoUtil.executeUpdate(  );
         daoUtil.free(  );
@@ -149,44 +153,44 @@ public final class WordDAO implements IWordDAO
      * {@inheritDoc }
      */
     @Override
-    public Collection<Word> selectWordsList( Plugin plugin )
+    public Collection<Counter> selectCounterList( Plugin plugin )
     {
-        Collection<Word> wordList = new ArrayList<Word>(  );
+        Collection<Counter> counterList = new ArrayList<Counter>(  );
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL, plugin );
         daoUtil.executeQuery(  );
 
         while ( daoUtil.next(  ) )
         {
-            Word word = new Word(  );
+            Counter counter = new Counter(  );
+            counter.setId( daoUtil.getInt( 1 ) );
+            counter.setResourceType( daoUtil.getString( 2 ) );
+            counter.setCounter( daoUtil.getInt( 3 ) );
 
-            word.setId( daoUtil.getInt( 1 ) );
-            word.setValue( daoUtil.getString( 2 ) );
-
-            wordList.add( word );
+            counterList.add( counter );
         }
 
         daoUtil.free(  );
 
-        return wordList;
+        return counterList;
     }
 
     /**
      * {@inheritDoc }
      */
     @Override
-    public Collection<Integer> selectIdWordsList( Plugin plugin )
+    public Collection<Integer> selectIdCounterList( Plugin plugin )
     {
-        Collection<Integer> wordList = new ArrayList<Integer>(  );
+        Collection<Integer> counterList = new ArrayList<Integer>(  );
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL_ID, plugin );
         daoUtil.executeQuery(  );
 
         while ( daoUtil.next(  ) )
         {
-            wordList.add( daoUtil.getInt( 1 ) );
+            counterList.add( daoUtil.getInt( 1 ) );
         }
 
         daoUtil.free(  );
 
-        return wordList;
+        return counterList;
     }
 }
