@@ -64,7 +64,7 @@ function checkWord(idTextArea)
 
 
 
-function checkWordWhithCpt(idTextArea, resourceType)
+function checkWordWithCounter(idTextArea, resourceType)
 
 {
 
