@@ -34,8 +34,8 @@
 package fr.paris.lutece.plugins.profanityfilter.service;
 
 import fr.paris.lutece.plugins.profanityfilter.business.Counter;
+import fr.paris.lutece.plugins.profanityfilter.utils.ProfanityResult;
 
-import fr.paris.plugins.profanityfilter.utils.ProfanityResult;
 
 
 public interface IProfanityFilter
@@ -52,7 +52,7 @@ public interface IProfanityFilter
      * @param str the string to check
      * @return Object ProfanityResult
      */
-    public ProfanityResult checkStringCpt( String str, String sourceType );
+    public ProfanityResult checkStringCounter( String str, String sourceType );
 
     /**
      *

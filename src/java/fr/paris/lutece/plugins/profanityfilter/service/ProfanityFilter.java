@@ -37,16 +37,15 @@ import fr.paris.lutece.plugins.profanityfilter.business.Counter;
 import fr.paris.lutece.plugins.profanityfilter.business.CounterHome;
 import fr.paris.lutece.plugins.profanityfilter.business.Word;
 import fr.paris.lutece.plugins.profanityfilter.business.WordHome;
+import fr.paris.lutece.plugins.profanityfilter.utils.ProfanityResult;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
 import fr.paris.lutece.portal.service.util.AppPropertiesService;
-
-import fr.paris.plugins.profanityfilter.utils.ProfanityResult;
 
 import org.apache.commons.lang.StringUtils;
 
 import java.text.Normalizer;
-
 import java.util.Collection;
+import java.util.regex.Pattern;
 
 
 public class ProfanityFilter implements IProfanityFilter
@@ -77,11 +76,12 @@ public class ProfanityFilter implements IProfanityFilter
     {
         ProfanityResult profResult = new ProfanityResult(  );
         String[] wordStr = null;
+        Pattern p = Pattern.compile("\\W");
         Collection<Word> wordList = WordHome.getWordsList(  );
 
         if ( ( str != null ) && StringUtils.isNotEmpty( str ) && StringUtils.isNotBlank( str ) )
         {
-            wordStr = str.split( " " );
+        	 wordStr = p.split(str);
         }
 
         boolean _isSwearWords = false;
@@ -107,9 +107,10 @@ public class ProfanityFilter implements IProfanityFilter
     }
 
     @Override
-    public ProfanityResult checkStringCpt( String str, String strResourceType )
+    public ProfanityResult checkStringCounter( String str, String strResourceType )
     {
         Counter counter = CounterHome.findByResourceTypeKey( strResourceType );
+        Pattern p = Pattern.compile("\\W");
 
         if ( counter == null )
         {
@@ -125,7 +126,7 @@ public class ProfanityFilter implements IProfanityFilter
 
         if ( ( str != null ) && StringUtils.isNotEmpty( str ) && StringUtils.isNotBlank( str ) )
         {
-            wordStr = str.split( " " );
+            wordStr = p.split(str);
         }
 
         boolean _isSwearWords = false;

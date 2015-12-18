@@ -48,7 +48,7 @@ import fr.paris.lutece.util.json.ErrorJsonResponse;
 import fr.paris.lutece.util.json.JsonResponse;
 import fr.paris.lutece.util.json.JsonUtil;
 
-import fr.paris.plugins.profanityfilter.utils.ProfanityResult;
+import fr.paris.lutece.plugins.profanityfilter.utils.ProfanityResult;
 
 import java.util.List;
 import java.util.Map;
@@ -123,7 +123,7 @@ public class FilterXPage extends MVCApplication
 
         if ( typeResource != null )
         {
-            result = _filterService.checkStringCpt( word, typeResource );
+            result = _filterService.checkStringCounter( word, typeResource );
         }
         else
         {
