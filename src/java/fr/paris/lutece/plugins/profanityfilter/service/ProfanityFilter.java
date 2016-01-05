@@ -169,7 +169,7 @@ public class ProfanityFilter implements IProfanityFilter
 
         for ( Word x : collection )
         {
-            if ( removeAccent( x.getValue(  ) ).toUpperCase(  ).equals( removeAccent( element ).toUpperCase(  ) ) )
+            if ( removeAccent( x.getValue(  ) ).toUpperCase(  ).equals( removeAccent( element ).toUpperCase(  ) ) || removeAccent(element ).toUpperCase(  ).contains( removeAccent( x.getValue(  ) ).toUpperCase(  ) ))
             {
                 return true;
             }
