@@ -91,9 +91,10 @@ public class ProfanityFilter implements IProfanityFilter
         {
             for ( String word : wordStr )
             {
-                if ( containsReferenceTo( wordList, word ) )
+            	String strWord=  containsReferenceTo( wordList, word ) ;
+                if ( strWord != null )
                 {
-                    profResult.addWord( word );
+                    profResult.addWord( strWord );
                     _isSwearWords = true;
                     number++;
                 }
@@ -136,9 +137,10 @@ public class ProfanityFilter implements IProfanityFilter
         {
             for ( String word : wordStr )
             {
-                if ( containsReferenceTo( wordList, word ) )
+            	String strWord=  containsReferenceTo( wordList, word ) ;
+                if ( strWord != null )
                 {
-                    profResult.addWord( word );
+                    profResult.addWord( strWord );
                     _isSwearWords = true;
                     number++;
                     counter.setCounter( counter.getCounter(  ) + 1 );
@@ -159,8 +161,13 @@ public class ProfanityFilter implements IProfanityFilter
     {
         return CounterHome.findByResourceTypeKey( strResourceType );
     }
-
-    public static boolean containsReferenceTo( Collection<Word> collection, String element )
+    /**
+     * Returns a word if contains reference
+     * @param collection
+     * @param element
+     * @return word
+     */
+    public static String containsReferenceTo( Collection<Word> collection, String element )
     {
         if ( collection == null )
         {
@@ -171,13 +178,17 @@ public class ProfanityFilter implements IProfanityFilter
         {
             if ( removeAccent( x.getValue(  ) ).toUpperCase(  ).equals( removeAccent( element ).toUpperCase(  ) ) || removeAccent(element ).toUpperCase(  ).contains( removeAccent( x.getValue(  ) ).toUpperCase(  ) ))
             {
-                return true;
+                return x.getValue(  );
             }
         }
 
-        return false;
+        return null;
     }
-
+    /**
+     * Delete accents of the word
+     * @param source
+     * @return words without accents
+     */
     public static String removeAccent( String source )
     {
         return Normalizer.normalize( source, Normalizer.Form.NFD ).replaceAll( "[\u0300-\u036F]", "" );

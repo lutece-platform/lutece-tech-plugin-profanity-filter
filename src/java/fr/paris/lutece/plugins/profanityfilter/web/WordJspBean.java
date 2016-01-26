@@ -99,6 +99,11 @@ public class WordJspBean extends ManageProfanityfilterJspBean
     // Session variable to store working values
     private Word _word;
 
+    /**
+     * 
+     * @param request
+     * @return
+     */
     @View( value = VIEW_MANAGE_WORDS, defaultView = true )
     public String getManageWords( HttpServletRequest request )
     {

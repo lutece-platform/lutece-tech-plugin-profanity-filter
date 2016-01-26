@@ -44,43 +44,75 @@ public class ProfanityResult
     private boolean _bIsSwearWords = false;
     private int _nCounterSwearWord;
 
-    public void addWord( String _strWord )
+    /**
+     * Add the word
+     * @param strWord
+     */
+    public void addWord( String strWord )
     {
-        this._strWords.add( _strWord );
+        _strWords.add( strWord );
     }
 
+    /**
+     * Returns the words
+     * @return words
+     */
     public Set<String> getSwearWords(  )
     {
-        return this._strWords;
+        return _strWords;
     }
 
+    /**
+     * Returns the number of the swear word
+     * @return numberSwearWord
+     */
     public int getNumberSwearWords(  )
     {
         return _nNumberSwearWords;
     }
 
-    public void setNumberSwearWords( int _nNumberSwearWords )
+    /**
+     * Sets the nNumberSwearWords
+     * @param nNumberSwearWords
+     */
+    public void setNumberSwearWords( int nNumberSwearWords )
     {
-        this._nNumberSwearWords = _nNumberSwearWords;
+        _nNumberSwearWords = nNumberSwearWords;
     }
 
+    /**
+     * Check if the word is a swear Word
+     * @return bool
+     */
     public boolean isSwearWords(  )
     {
         return _bIsSwearWords;
     }
 
-    public void setIsSwearWords( boolean _bIsSwearWords )
+    /**
+     * Sets isSwearWords
+     * @param bIsSwearWords
+     */
+    public void setIsSwearWords( boolean bIsSwearWords )
     {
-        this._bIsSwearWords = _bIsSwearWords;
+        _bIsSwearWords = bIsSwearWords;
     }
 
+    /**
+     * Returs CounterSwearWord
+     * @return CounterSwearWord
+     */
     public int getCounterSwearWords(  )
     {
         return _nCounterSwearWord;
     }
 
+    /**
+     * Returns CounterSwearWord
+     * @param nCounterSwearWord
+     */
     public void setCounterSwearWords( int nCounterSwearWord )
     {
-        this._nCounterSwearWord = nCounterSwearWord;
+        _nCounterSwearWord = nCounterSwearWord;
     }
 }

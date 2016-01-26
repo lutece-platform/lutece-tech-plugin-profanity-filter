@@ -62,6 +62,14 @@ public abstract class ManageProfanityfilterJspBean extends MVCAdminJspBean
     private String _strCurrentPageIndex;
     private int _nItemsPerPage;
 
+    /**
+     * 
+     * @param request
+     * @param strBookmark
+     * @param list
+     * @param strManageJsp
+     * @return
+     */
     protected Map<String, Object> getPaginatedListModel( HttpServletRequest request, String strBookmark, List list,
         String strManageJsp )
     {

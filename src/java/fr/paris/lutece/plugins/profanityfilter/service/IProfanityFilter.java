@@ -55,7 +55,7 @@ public interface IProfanityFilter
     public ProfanityResult checkStringCounter( String str, String sourceType );
 
     /**
-     *
+     * Returns a couter of sweard words
      * @param resourceTyp
      * @return
      */
