@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2015, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -35,36 +35,35 @@ package fr.paris.lutece.plugins.profanityfilter.business;
 
 import fr.paris.lutece.test.LuteceTestCase;
 
-
 public class WordBusinessTest extends LuteceTestCase
 {
     private final static String VALUE1 = "Value1";
     private final static String VALUE2 = "Value2";
 
-    public void testBusiness(  )
+    public void testBusiness( )
     {
         // Initialize an object
-        Word word = new Word(  );
+        Word word = new Word( );
         word.setValue( VALUE1 );
 
         // Create test
         WordHome.create( word );
 
-        Word wordStored = WordHome.findByPrimaryKey( word.getId(  ) );
-        assertEquals( wordStored.getValue(  ), word.getValue(  ) );
+        Word wordStored = WordHome.findByPrimaryKey( word.getId( ) );
+        assertEquals( wordStored.getValue( ), word.getValue( ) );
 
         // Update test
         word.setValue( VALUE2 );
         WordHome.update( word );
-        wordStored = WordHome.findByPrimaryKey( word.getId(  ) );
-        assertEquals( wordStored.getValue(  ), word.getValue(  ) );
+        wordStored = WordHome.findByPrimaryKey( word.getId( ) );
+        assertEquals( wordStored.getValue( ), word.getValue( ) );
 
         // List test
-        WordHome.getWordsList(  );
+        WordHome.getWordsList( );
 
         // Delete test
-        WordHome.remove( word.getId(  ) );
-        wordStored = WordHome.findByPrimaryKey( word.getId(  ) );
+        WordHome.remove( word.getId( ) );
+        wordStored = WordHome.findByPrimaryKey( word.getId( ) );
         assertNull( wordStored );
     }
 }

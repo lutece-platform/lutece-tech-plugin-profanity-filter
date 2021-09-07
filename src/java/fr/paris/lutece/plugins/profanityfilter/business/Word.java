@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2015, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -37,13 +37,12 @@ import org.hibernate.validator.constraints.*;
 
 import javax.validation.constraints.*;
 
-
 /**
  * This is the business class for the object Word
  */
 public class Word
 {
-    // Variables declarations 
+    // Variables declarations
     private int _nId;
     @NotEmpty( message = "#i18n{profanityfilter.validation.word.Value.notEmpty}" )
     @Size( max = 50, message = "#i18n{profanityfilter.validation.word.Value.size}" )
@@ -51,16 +50,19 @@ public class Word
 
     /**
      * Returns the Id
+     * 
      * @return The Id
      */
-    public int getId(  )
+    public int getId( )
     {
         return _nId;
     }
 
     /**
      * Sets the Id
-     * @param nId The Id
+     * 
+     * @param nId
+     *            The Id
      */
     public void setId( int nId )
     {
@@ -69,16 +71,19 @@ public class Word
 
     /**
      * Returns the Value
+     * 
      * @return The Value
      */
-    public String getValue(  )
+    public String getValue( )
     {
         return _strValue;
     }
 
     /**
      * Sets the Value
-     * @param strValue The Value
+     * 
+     * @param strValue
+     *            The Value
      */
     public void setValue( String strValue )
     {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2015, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -7,15 +7,15 @@
  * are met:
  *
  *  1. Redistributions of source code must retain the above copyright notice
- *         and the following disclaimer.
+ *     and the following disclaimer.
  *
  *  2. Redistributions in binary form must reproduce the above copyright notice
- *         and the following disclaimer in the documentation and/or other materials
- *         provided with the distribution.
+ *     and the following disclaimer in the documentation and/or other materials
+ *     provided with the distribution.
  *
  *  3. Neither the name of 'Mairie de Paris' nor 'Lutece' nor the names of its
- *         contributors may be used to endorse or promote products derived from
- *         this software without specific prior written permission.
+ *     contributors may be used to endorse or promote products derived from
+ *     this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -39,7 +39,6 @@ import fr.paris.lutece.portal.service.spring.SpringContextService;
 
 import java.util.Collection;
 
-
 /**
  * This class provides instances management methods (create, find, ...) for Word objects
  */
@@ -52,14 +51,16 @@ public final class WordHome
     /**
      * Private constructor - this class need not be instantiated
      */
-    private WordHome(  )
+    private WordHome( )
     {
     }
 
     /**
      * Create an instance of the word class
-     * @param word The instance of the Word which contains the informations to store
-     * @return The  instance of word which has been created with its primary key.
+     * 
+     * @param word
+     *            The instance of the Word which contains the informations to store
+     * @return The instance of word which has been created with its primary key.
      */
     public static Word create( Word word )
     {
@@ -70,8 +71,10 @@ public final class WordHome
 
     /**
      * Update of the word which is specified in parameter
-     * @param word The instance of the Word which contains the data to store
-     * @return The instance of the  word which has been updated
+     * 
+     * @param word
+     *            The instance of the Word which contains the data to store
+     * @return The instance of the word which has been updated
      */
     public static Word update( Word word )
     {
@@ -82,7 +85,9 @@ public final class WordHome
 
     /**
      * Remove the word whose identifier is specified in parameter
-     * @param nKey The word Id
+     * 
+     * @param nKey
+     *            The word Id
      */
     public static void remove( int nKey )
     {
@@ -94,7 +99,9 @@ public final class WordHome
 
     /**
      * Returns an instance of a word whose identifier is specified in parameter
-     * @param nKey The word primary key
+     * 
+     * @param nKey
+     *            The word primary key
      * @return an instance of Word
      */
     public static Word findByPrimaryKey( int nKey )
@@ -104,18 +111,20 @@ public final class WordHome
 
     /**
      * Load the data of all the word objects and returns them in form of a collection
+     * 
      * @return the collection which contains the data of all the word objects
      */
-    public static Collection<Word> getWordsList(  )
+    public static Collection<Word> getWordsList( )
     {
         return _dao.selectWordsList( _plugin );
     }
 
     /**
      * Load the id of all the word objects and returns them in form of a collection
+     * 
      * @return the collection which contains the id of all the word objects
      */
-    public static Collection<Integer> getIdWordsList(  )
+    public static Collection<Integer> getIdWordsList( )
     {
         return _dao.selectIdWordsList( _plugin );
     }

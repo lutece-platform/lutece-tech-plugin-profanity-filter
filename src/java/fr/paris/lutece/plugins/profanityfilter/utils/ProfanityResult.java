@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2015, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -36,16 +36,16 @@ package fr.paris.lutece.plugins.profanityfilter.utils;
 import java.util.HashSet;
 import java.util.Set;
 
-
 public class ProfanityResult
 {
-    private Set<String> _strWords = new HashSet<String>(  );
+    private Set<String> _strWords = new HashSet<String>( );
     private int _nNumberSwearWords;
     private boolean _bIsSwearWords = false;
     private int _nCounterSwearWord;
 
     /**
      * Add the word
+     * 
      * @param strWord
      */
     public void addWord( String strWord )
@@ -55,24 +55,27 @@ public class ProfanityResult
 
     /**
      * Returns the words
+     * 
      * @return words
      */
-    public Set<String> getSwearWords(  )
+    public Set<String> getSwearWords( )
     {
         return _strWords;
     }
 
     /**
      * Returns the number of the swear word
+     * 
      * @return numberSwearWord
      */
-    public int getNumberSwearWords(  )
+    public int getNumberSwearWords( )
     {
         return _nNumberSwearWords;
     }
 
     /**
      * Sets the nNumberSwearWords
+     * 
      * @param nNumberSwearWords
      */
     public void setNumberSwearWords( int nNumberSwearWords )
@@ -82,15 +85,17 @@ public class ProfanityResult
 
     /**
      * Check if the word is a swear Word
+     * 
      * @return bool
      */
-    public boolean isSwearWords(  )
+    public boolean isSwearWords( )
     {
         return _bIsSwearWords;
     }
 
     /**
      * Sets isSwearWords
+     * 
      * @param bIsSwearWords
      */
     public void setIsSwearWords( boolean bIsSwearWords )
@@ -100,15 +105,17 @@ public class ProfanityResult
 
     /**
      * Returs CounterSwearWord
+     * 
      * @return CounterSwearWord
      */
-    public int getCounterSwearWords(  )
+    public int getCounterSwearWords( )
     {
         return _nCounterSwearWord;
     }
 
     /**
      * Returns CounterSwearWord
+     * 
      * @param nCounterSwearWord
      */
     public void setCounterSwearWords( int nCounterSwearWord )

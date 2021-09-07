@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2015, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -37,29 +37,31 @@ import org.hibernate.validator.constraints.*;
 
 import javax.validation.constraints.*;
 
-
 /**
  * This is the business class for the object Word
  */
 public class Counter
 {
-    // Variables declarations 
+    // Variables declarations
     private int _nId;
     private String _strResourceType;
     private int _ncounter;
 
     /**
      * Returns the Id
+     * 
      * @return The Id
      */
-    public int getId(  )
+    public int getId( )
     {
         return _nId;
     }
 
     /**
      * Sets the Id
-     * @param nId The Id
+     * 
+     * @param nId
+     *            The Id
      */
     public void setId( int nId )
     {
@@ -68,16 +70,19 @@ public class Counter
 
     /**
      * Returns the _strResourceType
+     * 
      * @return The _strResourceType
      */
-    public String getResourceType(  )
+    public String getResourceType( )
     {
         return _strResourceType;
     }
 
     /**
      * Sets the _strResourceType
-     * @param strValue The _strResourceType
+     * 
+     * @param strValue
+     *            The _strResourceType
      */
     public void setResourceType( String strResourceType )
     {
@@ -86,16 +91,19 @@ public class Counter
 
     /**
      * Returns the counter
+     * 
      * @return The counter
      */
-    public int getCounter(  )
+    public int getCounter( )
     {
         return _ncounter;
     }
 
     /**
      * Sets the _ncounter
-     * @param nId The _ncounter
+     * 
+     * @param nId
+     *            The _ncounter
      */
     public void setCounter( int ncounter )
     {

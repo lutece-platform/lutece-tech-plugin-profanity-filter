@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2015, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -36,26 +36,29 @@ package fr.paris.lutece.plugins.profanityfilter.service;
 import fr.paris.lutece.plugins.profanityfilter.business.Counter;
 import fr.paris.lutece.plugins.profanityfilter.utils.ProfanityResult;
 
-
-
 public interface IProfanityFilter
 {
     /**
      * Check the str
-     * @param str the string to check
+     * 
+     * @param str
+     *            the string to check
      * @return Object ProfanityResult
      */
     public ProfanityResult checkString( String str );
 
     /**
      * Check the str and increment cpt
-     * @param str the string to check
+     * 
+     * @param str
+     *            the string to check
      * @return Object ProfanityResult
      */
     public ProfanityResult checkStringCounter( String str, String sourceType );
 
     /**
      * Returns a couter of sweard words
+     * 
      * @param resourceTyp
      * @return
      */

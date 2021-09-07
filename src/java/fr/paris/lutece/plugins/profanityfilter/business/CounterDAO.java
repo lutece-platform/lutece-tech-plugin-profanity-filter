@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2015, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -7,15 +7,15 @@
  * are met:
  *
  *  1. Redistributions of source code must retain the above copyright notice
- *         and the following disclaimer.
+ *     and the following disclaimer.
  *
  *  2. Redistributions in binary form must reproduce the above copyright notice
- *         and the following disclaimer in the documentation and/or other materials
- *         provided with the distribution.
+ *     and the following disclaimer in the documentation and/or other materials
+ *     provided with the distribution.
  *
  *  3. Neither the name of 'Mairie de Paris' nor 'Lutece' nor the names of its
- *         contributors may be used to endorse or promote products derived from
- *         this software without specific prior written permission.
+ *     contributors may be used to endorse or promote products derived from
+ *     this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -39,7 +39,6 @@ import fr.paris.lutece.util.sql.DAOUtil;
 import java.util.ArrayList;
 import java.util.Collection;
 
-
 /**
  * This class provides Data Access methods for Word objects
  */
@@ -56,22 +55,24 @@ public final class CounterDAO implements ICounterDAO
 
     /**
      * Generates a new primary key
-     * @param plugin The Plugin
+     * 
+     * @param plugin
+     *            The Plugin
      * @return The new primary key
      */
     public int newPrimaryKey( Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_NEW_PK, plugin );
-        daoUtil.executeQuery(  );
+        daoUtil.executeQuery( );
 
         int nKey = 1;
 
-        if ( daoUtil.next(  ) )
+        if ( daoUtil.next( ) )
         {
             nKey = daoUtil.getInt( 1 ) + 1;
         }
 
-        daoUtil.free(  );
+        daoUtil.free( );
 
         return nKey;
     }
@@ -86,12 +87,12 @@ public final class CounterDAO implements ICounterDAO
 
         counter.setId( newPrimaryKey( plugin ) );
 
-        daoUtil.setInt( 1, counter.getId(  ) );
-        daoUtil.setString( 2, counter.getResourceType(  ) );
-        daoUtil.setInt( 3, counter.getCounter(  ) );
+        daoUtil.setInt( 1, counter.getId( ) );
+        daoUtil.setString( 2, counter.getResourceType( ) );
+        daoUtil.setInt( 3, counter.getCounter( ) );
 
-        daoUtil.executeUpdate(  );
-        daoUtil.free(  );
+        daoUtil.executeUpdate( );
+        daoUtil.free( );
     }
 
     /**
@@ -102,19 +103,19 @@ public final class CounterDAO implements ICounterDAO
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT, plugin );
         daoUtil.setString( 1, strResourceType );
-        daoUtil.executeQuery(  );
+        daoUtil.executeQuery( );
 
         Counter counter = null;
 
-        if ( daoUtil.next(  ) )
+        if ( daoUtil.next( ) )
         {
-            counter = new Counter(  );
+            counter = new Counter( );
             counter.setId( daoUtil.getInt( 1 ) );
             counter.setResourceType( daoUtil.getString( 2 ) );
             counter.setCounter( daoUtil.getInt( 3 ) );
         }
 
-        daoUtil.free(  );
+        daoUtil.free( );
 
         return counter;
     }
@@ -127,8 +128,8 @@ public final class CounterDAO implements ICounterDAO
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_DELETE, plugin );
         daoUtil.setInt( 1, nKey );
-        daoUtil.executeUpdate(  );
-        daoUtil.free(  );
+        daoUtil.executeUpdate( );
+        daoUtil.free( );
     }
 
     /**
@@ -139,14 +140,14 @@ public final class CounterDAO implements ICounterDAO
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_UPDATE, plugin );
 
-        daoUtil.setInt( 1, counter.getId(  ) );
-        daoUtil.setString( 2, counter.getResourceType(  ) );
-        daoUtil.setInt( 3, counter.getCounter(  ) );
+        daoUtil.setInt( 1, counter.getId( ) );
+        daoUtil.setString( 2, counter.getResourceType( ) );
+        daoUtil.setInt( 3, counter.getCounter( ) );
 
-        daoUtil.setString( 4, counter.getResourceType(  ) );
+        daoUtil.setString( 4, counter.getResourceType( ) );
 
-        daoUtil.executeUpdate(  );
-        daoUtil.free(  );
+        daoUtil.executeUpdate( );
+        daoUtil.free( );
     }
 
     /**
@@ -155,13 +156,13 @@ public final class CounterDAO implements ICounterDAO
     @Override
     public Collection<Counter> selectCounterList( Plugin plugin )
     {
-        Collection<Counter> counterList = new ArrayList<Counter>(  );
+        Collection<Counter> counterList = new ArrayList<Counter>( );
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL, plugin );
-        daoUtil.executeQuery(  );
+        daoUtil.executeQuery( );
 
-        while ( daoUtil.next(  ) )
+        while ( daoUtil.next( ) )
         {
-            Counter counter = new Counter(  );
+            Counter counter = new Counter( );
             counter.setId( daoUtil.getInt( 1 ) );
             counter.setResourceType( daoUtil.getString( 2 ) );
             counter.setCounter( daoUtil.getInt( 3 ) );
@@ -169,7 +170,7 @@ public final class CounterDAO implements ICounterDAO
             counterList.add( counter );
         }
 
-        daoUtil.free(  );
+        daoUtil.free( );
 
         return counterList;
     }
@@ -180,16 +181,16 @@ public final class CounterDAO implements ICounterDAO
     @Override
     public Collection<Integer> selectIdCounterList( Plugin plugin )
     {
-        Collection<Integer> counterList = new ArrayList<Integer>(  );
+        Collection<Integer> counterList = new ArrayList<Integer>( );
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL_ID, plugin );
-        daoUtil.executeQuery(  );
+        daoUtil.executeQuery( );
 
-        while ( daoUtil.next(  ) )
+        while ( daoUtil.next( ) )
         {
             counterList.add( daoUtil.getInt( 1 ) );
         }
 
-        daoUtil.free(  );
+        daoUtil.free( );
 
         return counterList;
     }

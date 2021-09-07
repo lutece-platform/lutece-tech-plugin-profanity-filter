@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2015, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -47,21 +47,19 @@ import java.text.Normalizer;
 import java.util.Collection;
 import java.util.regex.Pattern;
 
-
 public class ProfanityFilter implements IProfanityFilter
 {
     private static ProfanityFilter _singleton;
 
     // bean
     public static final String BEAN_PROFANITY_FILTER_SERVICE = "profanityfilter.profanityfilterService";
-    public static final String CHARACTER_SPACE_BETWEEN_WORDS = AppPropertiesService.getProperty( "character_space_between_words",
-            " " );
+    public static final String CHARACTER_SPACE_BETWEEN_WORDS = AppPropertiesService.getProperty( "character_space_between_words", " " );
 
     /**
-    *
-    * @return IEudonetWsService
-    */
-    public static IProfanityFilter getService(  )
+     *
+     * @return IEudonetWsService
+     */
+    public static IProfanityFilter getService( )
     {
         if ( _singleton == null )
         {
@@ -74,14 +72,14 @@ public class ProfanityFilter implements IProfanityFilter
     @Override
     public ProfanityResult checkString( String str )
     {
-        ProfanityResult profResult = new ProfanityResult(  );
-        String[] wordStr = null;
-        Pattern p = Pattern.compile("\\W");
-        Collection<Word> wordList = WordHome.getWordsList(  );
+        ProfanityResult profResult = new ProfanityResult( );
+        String [ ] wordStr = null;
+        Pattern p = Pattern.compile( "\\W" );
+        Collection<Word> wordList = WordHome.getWordsList( );
 
         if ( ( str != null ) && StringUtils.isNotEmpty( str ) && StringUtils.isNotBlank( str ) )
         {
-        	 wordStr = p.split(str);
+            wordStr = p.split( str );
         }
 
         boolean _isSwearWords = false;
@@ -91,7 +89,7 @@ public class ProfanityFilter implements IProfanityFilter
         {
             for ( String word : wordStr )
             {
-            	String strWord=  containsReferenceTo( wordList, word ) ;
+                String strWord = containsReferenceTo( wordList, word );
                 if ( strWord != null )
                 {
                     profResult.addWord( strWord );
@@ -111,23 +109,23 @@ public class ProfanityFilter implements IProfanityFilter
     public ProfanityResult checkStringCounter( String str, String strResourceType )
     {
         Counter counter = CounterHome.findByResourceTypeKey( strResourceType );
-        Pattern p = Pattern.compile("\\W");
+        Pattern p = Pattern.compile( "\\W" );
 
         if ( counter == null )
         {
-            Counter newCounter = new Counter(  );
+            Counter newCounter = new Counter( );
             newCounter.setCounter( 0 );
             newCounter.setResourceType( strResourceType );
             counter = CounterHome.create( newCounter );
         }
 
-        ProfanityResult profResult = new ProfanityResult(  );
-        String[] wordStr = null;
-        Collection<Word> wordList = WordHome.getWordsList(  );
+        ProfanityResult profResult = new ProfanityResult( );
+        String [ ] wordStr = null;
+        Collection<Word> wordList = WordHome.getWordsList( );
 
         if ( ( str != null ) && StringUtils.isNotEmpty( str ) && StringUtils.isNotBlank( str ) )
         {
-            wordStr = p.split(str);
+            wordStr = p.split( str );
         }
 
         boolean _isSwearWords = false;
@@ -137,15 +135,15 @@ public class ProfanityFilter implements IProfanityFilter
         {
             for ( String word : wordStr )
             {
-            	String strWord=  containsReferenceTo( wordList, word ) ;
+                String strWord = containsReferenceTo( wordList, word );
                 if ( strWord != null )
                 {
                     profResult.addWord( strWord );
                     _isSwearWords = true;
                     number++;
-                    counter.setCounter( counter.getCounter(  ) + 1 );
+                    counter.setCounter( counter.getCounter( ) + 1 );
                     CounterHome.update( counter );
-                    profResult.setCounterSwearWords( counter.getCounter(  ) );
+                    profResult.setCounterSwearWords( counter.getCounter( ) );
                 }
             }
         }
@@ -161,8 +159,10 @@ public class ProfanityFilter implements IProfanityFilter
     {
         return CounterHome.findByResourceTypeKey( strResourceType );
     }
+
     /**
      * Returns a word if contains reference
+     * 
      * @param collection
      * @param element
      * @return word
@@ -176,16 +176,19 @@ public class ProfanityFilter implements IProfanityFilter
 
         for ( Word x : collection )
         {
-            if ( removeAccent( x.getValue(  ) ).toUpperCase(  ).equals( removeAccent( element ).toUpperCase(  ) ) || removeAccent(element ).toUpperCase(  ).contains( removeAccent( x.getValue(  ) ).toUpperCase(  ) ))
+            if ( removeAccent( x.getValue( ) ).toUpperCase( ).equals( removeAccent( element ).toUpperCase( ) )
+                    || removeAccent( element ).toUpperCase( ).contains( removeAccent( x.getValue( ) ).toUpperCase( ) ) )
             {
-                return x.getValue(  );
+                return x.getValue( );
             }
         }
 
         return null;
     }
+
     /**
      * Delete accents of the word
+     * 
      * @param source
      * @return words without accents
      */

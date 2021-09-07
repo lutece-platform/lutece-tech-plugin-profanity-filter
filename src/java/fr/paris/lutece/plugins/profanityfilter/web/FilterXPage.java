@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2015, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -55,7 +55,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 /**
  * This class provides the user interface to view Idee xpages
  */
@@ -80,7 +79,7 @@ public class FilterXPage extends MVCApplication
     // Views
     private static final String VIEW_FILTER = "viewFilter";
 
-    //Actions 
+    // Actions
     private static final String ACTION_PROFANITY_FILTER = "isSwearWord";
 
     // Json CODE
@@ -88,19 +87,20 @@ public class FilterXPage extends MVCApplication
     private static final String JSON_WORD_AUTHORIZED = "WORD_IS_AUTHORIZED";
 
     /**
-     * Returns the view  of filter
+     * Returns the view of filter
      *
-     * @param request The Http request
+     * @param request
+     *            The Http request
      * @return The HTML
      */
     @View( value = VIEW_FILTER, defaultView = true )
     public XPage getViewFilter( HttpServletRequest request )
     {
-        List<Word> listWords = (List<Word>) WordHome.getWordsList(  );
-        Map<String, Object> model = getModel(  );
+        List<Word> listWords = (List<Word>) WordHome.getWordsList( );
+        Map<String, Object> model = getModel( );
         model.put( MARK_WORDS_NOTAUTHORIZED, listWords );
 
-        return getXPage( TEMPLATE_VIEW_FILTER, request.getLocale(  ), model );
+        return getXPage( TEMPLATE_VIEW_FILTER, request.getLocale( ), model );
     }
 
     /**
@@ -110,13 +110,12 @@ public class FilterXPage extends MVCApplication
      * @throws UserNotSignedException
      */
     @Action( value = ACTION_PROFANITY_FILTER )
-    public String isSwearWord( HttpServletRequest request )
-        throws UserNotSignedException
+    public String isSwearWord( HttpServletRequest request ) throws UserNotSignedException
     {
         AbstractJsonResponse jsonResponse = null;
         ProfanityResult result = null;
 
-        IProfanityFilter _filterService = ProfanityFilter.getService(  );
+        IProfanityFilter _filterService = ProfanityFilter.getService( );
 
         String word = request.getParameter( PARAMETER_WORD );
         String typeResource = request.getParameter( PARAMETER_TYPE_RESSOURCE );
@@ -130,9 +129,9 @@ public class FilterXPage extends MVCApplication
             result = _filterService.checkString( word );
         }
 
-        if ( ( result != null ) && result.isSwearWords(  ) )
+        if ( ( result != null ) && result.isSwearWords( ) )
         {
-            jsonResponse = new JsonResponse( result.getSwearWords(  ) );
+            jsonResponse = new JsonResponse( result.getSwearWords( ) );
         }
         else
         {
